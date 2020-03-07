@@ -1,5 +1,5 @@
 -module(functions_exercise).
--export([ord/1]).
+-export([ord/1, igual/1]).
 
 %% 1) Escribid una función que devuelva el ordinal de un número en inglés (considera sólo números del 1 al 9).
 %% Por ej.,
@@ -20,3 +20,10 @@ ord(Num) when Num > 0 ->
 
 %% Returns the last digit of an integer.
 lastDigitOfNumber(Num) -> list_to_integer([lists:last(integer_to_list(Num))]).
+
+%% 2) Escribid  una función que, dada una tupla de dos elementos, diga si son iguales o no.
+%% Por ej.,
+%% igual({2,3}) -> false
+%% igual({a,a}) -> true
+igual({X, X}) -> true;
+igual(_) -> false.
