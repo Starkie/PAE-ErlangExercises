@@ -1,5 +1,5 @@
 -module(functions_exercise).
--export([ord/1, igual/1, foo/1]).
+-export([ord/1, igual/1, foo/1, calc/1]).
 
 %% 1) Escribid una función que devuelva el ordinal de un número en inglés (considera sólo números del 1 al 9).
 %% Por ej.,
@@ -38,3 +38,20 @@ igual(_) -> false.
 foo([{X, X} | Tail]) -> Tail;
 foo([{X, Y} | _]) -> {Y, X};
 foo(X) -> X.
+
+%% 4) Escribid una función que actúe como una calculadora: dada una tupla de la forma
+%%         {OPERACIÓN, NUM1, NUM2}
+%% debe devolver el resultado de evaluar la OPERACIÓN con los argumentos NUM1 y NUM2.
+%%
+%% Por ej.,
+%%
+%% calc({add,6,3}) -> 9
+%% calc({sub,6,3}) -> 3
+%% calc({mul,6,3}) -> 18
+%% calc({coc,6,3}) -> 2  %% coc de cociente
+%% calc({neg,6}) -> -6
+calc({add, X, Y}) -> X + Y;
+calc({sub, X, Y}) -> X - Y;
+calc({mult, X, Y}) -> X * Y;
+calc({coc, X, Y}) -> X / Y;
+calc({neg, X}) -> -X.
