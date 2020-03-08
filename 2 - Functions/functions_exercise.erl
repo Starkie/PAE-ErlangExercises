@@ -1,5 +1,5 @@
 -module(functions_exercise).
--export([ord/1, igual/1, foo/1, calc/1]).
+-export([ord/1, igual/1, foo/1, calc/1, string/1]).
 
 %% 1) Escribid una función que devuelva el ordinal de un número en inglés (considera sólo números del 1 al 9).
 %% Por ej.,
@@ -55,3 +55,24 @@ calc({sub, X, Y}) -> X - Y;
 calc({mult, X, Y}) -> X * Y;
 calc({coc, X, Y}) -> X / Y;
 calc({neg, X}) -> -X.
+
+%% 5) Escribid una función que tome un valor numérico o un átomo y lo convierta a un string.
+%%    Si el argumento es una lista o una tupla, lo deja tal cual. En cualquier otro caso, devuelve "*".
+%% Por ej.,
+%%
+%% string(1) -> "1"
+%% string(2.45) -> "2.45000000000000017764e+00"
+%% string(ok) -> "ok"
+%% string([1,2,3]) -> [1,2,3]
+%% string({a,b}) -> {a,b}
+%% string(self()) -> "*"
+%%
+%% PISTA: Puedes usar las siguientes funciones:
+%%
+%%     is_integer/1, is_float/1, is_atom/1 is_list/1, is_tuple/1 (en las guardas) y
+%%     integer_to_list/1, float_to_list/1, atom_to_list/1 (en el cuerpo).
+string(X) when is_integer(X) -> integer_to_list(X);
+string(X) when is_float(X) -> float_to_list(X);
+string(X) when is_atom(X) -> atom_to_list(X);
+string(X) when is_tuple(X) orelse is_list(X) -> X;
+string(_) -> "*".
