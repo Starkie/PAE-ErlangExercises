@@ -1,5 +1,5 @@
 -module(recursion_exercise).
--export([search/2, unzip/1]).
+-export([search/2, unzip/1, calc/1]).
 
 %% 1) Dado un término y una lista, escribid una función que devuelva true o false dependiendo
 %%    de si el término está o no en la lista.
@@ -24,3 +24,15 @@ unzip(X) -> unzip(X, {[], []}).
 %% single time.
 unzip([], {Xs, Ys}) -> {lists:reverse(Xs), lists:reverse(Ys)};
 unzip([{X, Y} | T], {Xs, Ys}) -> unzip(T, {[X | Xs], [Y | Ys]}).
+
+
+%% 3) Ampliad la calculadora de la tarea anterior para que acepte términos con
+%%    funciones términos como éstos:
+%%    {add, {sub, 4, {neg, 5}}, {coc, 3, 4}}
+
+calc({add, X, Y}) -> calc(X) + calc(Y);
+calc({sub, X, Y}) -> calc(X) - calc(Y);
+calc({mul, X, Y}) -> calc(X) * calc(Y);
+calc({coc, X, Y}) -> calc(X) / calc(Y);
+calc({neg, X}) -> - calc(X);
+calc(X) when is_integer(X); is_float(X) -> X.
