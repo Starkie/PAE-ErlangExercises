@@ -20,5 +20,7 @@ search(Element, [_|T]) -> search(Element, T).
 %% X = foo(Y), E
 unzip(X) -> unzip(X, {[], []}).
 
-unzip([], {Xs, Ys}) -> {Xs, Ys};
-unzip([{X, Y} | T], {Xs, Ys}) -> unzip(T, {Xs ++ [X], Ys ++ [Y]}).
+%% Using a tail recursive implementation is cheaper that appending each element every
+%% single time.
+unzip([], {Xs, Ys}) -> {lists:reverse(Xs), lists:reverse(Ys)};
+unzip([{X, Y} | T], {Xs, Ys}) -> unzip(T, {[X | Xs], [Y | Ys]}).
